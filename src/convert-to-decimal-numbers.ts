@@ -7,17 +7,29 @@ import { romanNumeralConstant } from '../data/numeral-const.data'
  */
 export function convertToDecimalNumber(romanStr: string): number {
     if (!romanStr.length) throw new Error('An Empty string is not allowed')
+
     const regex = /^[IVXLCDM]+$/
     if (!regex.test(romanStr))
         throw new Error('Only valid roman numerals are allowed')
 
-    let romanVal: string = ''
+    //Work the string from right to left
 
-    // for (let romanKey of romanNumeralConstant) {
-    //     while (decimalNum >= romanKey.num) {
-    //         romanVal += romanKey.roman
-    //         decimalNum -= romanKey.num
-    //     }
-    // }
-    return parseInt(romanVal)
+    let result = getNumberEquivalent(romanStr.charAt(romanStr.length - 1))
+    for (let i = romanStr.length - 2; i >= 0; i--) {
+        if (
+            getNumberEquivalent(romanStr.charAt(i)) <
+            getNumberEquivalent(romanStr.charAt(i + 1))
+        ) {
+            result -= getNumberEquivalent(romanStr.charAt(i))
+        } else {
+            result += getNumberEquivalent(romanStr.charAt(i))
+        }
+    }
+
+    return result
+}
+
+function getNumberEquivalent(val: string) {
+    let index = romanNumeralConstant.findIndex((x) => x.roman === val)
+    return romanNumeralConstant[index].num
 }

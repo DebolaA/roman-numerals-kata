@@ -33,7 +33,7 @@ describe('convertToDecimalNumber', () => {
     })
 
     test('returns the Roman Numeral Value of the inputed integer', () => {
-        expect(convertToDecimalNumber('XXXIII')).toBe('33')
+        expect(convertToDecimalNumber('XXXIII')).toBe(33)
         expect(convertToDecimalNumber('MMXII')).toBe(2012)
         expect(convertToDecimalNumber('MCMXCVI')).toBe(1996)
     })
