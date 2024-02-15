@@ -5,9 +5,11 @@ import { romanNumeralConstant } from '../data/numeral-const.data'
  * @param {String} s
  * @returns {Number} n
  */
-export function convertToDecimalNumber(decimalNum: string): number {
-    if (!decimalNum) throw new Error('Number 0 cannot be passed')
-    if (!Number.isInteger(decimalNum)) throw new Error('Number is required')
+export function convertToDecimalNumber(romanStr: string): number {
+    if (!romanStr.length) throw new Error('An Empty string is not allowed')
+    const regex = /^[IVXLCDM]+$/
+    if (!regex.test(romanStr))
+        throw new Error('Only valid roman numerals are allowed')
 
     let romanVal: string = ''
 
